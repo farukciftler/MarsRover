@@ -135,6 +135,7 @@ namespace MarsRover
             numerical in order to perform the necessary
             operations. Here it makes use of the Direction enum.
 
+            For Example:
             Non-numerical input: 1 2 N
             Numerical version: 1 2 0 
              */
