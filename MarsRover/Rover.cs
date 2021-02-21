@@ -4,13 +4,13 @@ using System.Text;
 
 namespace MarsRover
 {
-    class Rover
+    public class Rover
     {
         public int[] Coordinates { get; set; }
         public string Directions { get; set; }
     }
 
-    class RoverLogic
+    public class RoverLogic
     {
       #region Rover Logic Functions
       public void MainLogic(string input)
@@ -44,17 +44,17 @@ namespace MarsRover
             {            
                 RoverLogic logic = new RoverLogic();
                 Rover rover = new Rover();
-                int[] numbers = ConvertToCoordinates(inputArray[i * 2 - 1]);
+                int[] coordinates= ConvertToCoordinates(inputArray[i * 2 - 1]);
                 int[] result = { 0, 0, 0 };
-                rover.Coordinates = numbers;
+                rover.Coordinates = coordinates;
                 rover.Directions = inputArray[i * 2];
                 result = logic.GetRoute(rover.Coordinates, rover.Directions, border);
-                Console.WriteLine(ConvertResult(result));
+                Console.WriteLine(ConvertToResult(result));
             }
         }
       public int[] GetRoute(int[] coordinates, string directions, int[] border)
         {
-            var reachedExceededLimit = isLimit(coordinates, border); //Plateu limits are controlled by this function.
+            var reachedExceededLimit = IsLimit(coordinates, border); //Plateu limits are controlled by this function.
             int[] newCoordinates = coordinates;
             var rotate = directions.ToCharArray();
             foreach (var item in rotate)
@@ -97,7 +97,7 @@ namespace MarsRover
             };
             return newCoordinates;
         }
-      public string ConvertResult(int[] coordinates)
+      public string ConvertToResult(int[] coordinates)
         {
             /*
             Converts the numerical result values
@@ -178,15 +178,16 @@ namespace MarsRover
             does not go beyond the plateau and generate the necessary warnings. 
              */
             int[] border = new int[2];
+            var iterator = 0;
             foreach (var item in borderStringLine.Split(null))
             {
-                var iterator = 0;
+               
                 border[iterator] = Convert.ToInt32(item);
                 iterator++;
             }
             return border;
         }
-      public int[] isLimit(int[] coordinates, int[] border)
+      public int[] IsLimit(int[] coordinates, int[] border)
         {
 
             /*
